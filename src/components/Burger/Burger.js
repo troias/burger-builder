@@ -5,23 +5,19 @@ const burger = (props) => {
 
     //  variable that returns a jsx element/array/s based on the key value 
 
-    const x = Object.keys(props.ingredients).map(x => {
-        return [...Array(props.ingredients[x])].map((q, i) =>{
+    let x = Object.keys(props.ingredients).map(x => {
+        return [...Array(props.ingredients[x])].map((q, i) => {
             return  <BurgerIngredient key={x + i} type={x} />
+          
         })
-    })
-   
-    //  gets keys 
+    }).reduce((arr, el) => {
+        return arr.concat(el)
+    }, [])
+  
 
-    //  return array of keys -
-
-    //  create new arrays of  based on the amount ob keys and the amount of values
-
-    //  put jsx elements into that array
-
-    // create and array for each key 
-
-    
+    if (x.length === 0) {
+        x = <p> Please Add ingredients </p>;
+    }
 
     
     return (
