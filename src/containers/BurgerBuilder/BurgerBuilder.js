@@ -19,7 +19,7 @@ class BurgerBuilder extends React.Component {
         this.state = {
             ingredients: {
                 salad: 0, 
-                bacon: 0, 
+                bacon: 1, 
                 cheese: 2, 
                 meat: 0 ,
             }, 
