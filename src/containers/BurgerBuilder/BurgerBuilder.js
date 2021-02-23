@@ -110,7 +110,7 @@ class BurgerBuilder extends React.Component {
 
     return (
       <Aux>
-        <Modal show={this.state.purchasing}>
+        <Modal show={this.state.purchasing}  remove={this.closeHandler} >
           <OrderSummary ingredients={this.state.ingredients} close={this.closeHandler} />
         </Modal>
         <div>
