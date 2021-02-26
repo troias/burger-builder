@@ -2,7 +2,7 @@ import classes from "./SideDrawer.module.css";
 import Logo from "../../Logo/Logo";
 import NavItems from "../NavigationItems/NavigationItems";
 import Backdrop from "../../UI/Backdrop/Backdrop";
-import Aux from "../../../hoc/Auxillary";
+import Aux from "../../../hoc/Auxillary/Auxillary";
 
 const sideDrawer = (props) => {
   //conditionally set css - opening closing tag
