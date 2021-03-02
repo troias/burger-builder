@@ -7,7 +7,7 @@ class Modal extends React.Component {
 
     //Life cycle events 
     shouldComponentUpdate(nextProps, nextState) {
-        return nextProps.show !== this.props.show
+        return nextProps.show !== this.props.show  || nextProps.children !== this.props.children
     }
     componentWillUpdate() {
         console.log('[Modal] Will update')
