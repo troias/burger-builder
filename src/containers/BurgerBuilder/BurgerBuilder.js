@@ -30,7 +30,8 @@ class BurgerBuilder extends React.Component {
   }
 
   componentDidMount() {
-    axios.get('https://react-my-burger-8f966-default-rtdb.firebaseio.com/ingrediens.json').then(x => {
+  
+    instance.get('/ingrediens.json').then(x => {
       this.setState({
         ingredients: x.data
       })
@@ -103,7 +104,7 @@ class BurgerBuilder extends React.Component {
     this.setState({
       purchasing: true,
     });
-    console.log(this.state.purchasing);
+   
   };
 
 
@@ -114,36 +115,16 @@ class BurgerBuilder extends React.Component {
   }
 
   purchaseContinueHandler = (props) => {
-    this.setState({
-      loading: true
-    })
-    // alert("you continued")
-    const obj = {
-      ingredients: this.state.ingredients,
-      price: this.state.totalPrice,
-      customer: {
-        name: 'troy flavell',
-        address: {
-          street: `4 god place`,
-          zip: 3216,
-          country: 'Germany'
-
-        },
-        email: "test@test.com"
-      },
-      deliveryMethod: "train"
+    const queryParam = []
+    for (let i in this.state.ingredients) {
+      queryParam.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]))
     }
-    instance.post('/orders.json', obj).then(x => {
-      this.setState({
-        loading: false,
-        purchasing: false
-      })
-    }).catch(err => {
-      console.log(err);
-      this.setState({
-        loading: false,
-        purchasing: false
-      })
+    queryParam.push('price=' +  this.state.totalPrice)
+    const queryString = queryParam.join('&')
+
+    this.props.history.push({
+      pathname: 'checkout', 
+      search: '?' + queryString
     })
   }
 
