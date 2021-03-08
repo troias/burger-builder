@@ -3,16 +3,71 @@ import Button from '../../../components/UI/Button/Button';
 import classes from './ContactData.module.css'
 import instance from '../../../axios-orders'
 import Spinner from '../../../components/UI/Spinner/Spinner'
+import Form from '../../../components/UI/Forms/Input/Input'
 
 class ContactData extends Component {
     state = {
-        name: "",
-        email: '',
-        address: {
-            street: '',
-            postalCode: '',
+        orderForm: {
+            name: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Name'
+                },
+                value: '',
+            },
+            street: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Your Street'
+                },
+                value: '',
+            },
+            zip: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'ZIP'
+                },
+                value: '',
+            },
+            country: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'text',
+                    placeholder: 'Country'
+                },
+                value: '',
+            },
+            email: {
+                elementType: 'input',
+                elementConfig: {
+                    type: 'email',
+                    placeholder: 'Email'
+                },
+                value: '',
+            },
+            deliveryMethod: {
+                elementType: 'select',
+                elementConfig: {
+                    options: [
+                        {
+                            value: 'fastest',
+                            displayValue: 'Fastest'
+                        }, 
+                        {
+                            value: 'Cheapest',
+                            displayValue: 'Cheapest'
+                        }
+                    ]
+
+                },
+                value: '',
+            },
         },
-        loading: false, 
+
+        loading: false,
     }
 
     orderhandler = (event) => {
@@ -25,17 +80,7 @@ class ContactData extends Component {
         const obj = {
             ingredients: this.props.ingredients,
             price: this.props.price,
-            customer: {
-                name: 'troy flavell',
-                address: {
-                    street: `4 god place`,
-                    zip: 3216,
-                    country: 'Germany'
 
-                },
-                email: "test@test.com"
-            },
-            deliveryMethod: "train"
         }
         instance.post('/orders.json', obj).then(x => {
             this.setState({
@@ -54,23 +99,23 @@ class ContactData extends Component {
     render() {
         let form = (
             <form>
-            <input className={classes.input} type="text" name="name" placeholder="Your name" />
-            <input className={classes.input} type="email" name="name" placeholder="Your email" />
-            <input className={classes.input} type="text" name="Street" placeholder="Street" />
-            <input className={classes.input} type="text" name="postal" placeholder="Postal Code" />
-            <Button
-                btnType="Success"
-                clicked={this.orderhandler}
-            >Order</Button>
-        </form>
+                <Form elementType="..." elementConfig="..."  value="..." />
+                <Form inputtype="input" type="email" name="name" placeholder="Your email" />
+                <Form inputtype="input" type="text" name="Street" placeholder="Street" />
+                <Form inputtype="input" type="text" name="postal" placeholder="Postal Code" />
+                <Button
+                    btnType="Success"
+                    clicked={this.orderhandler}
+                >Order</Button>
+            </form>
         )
         if (this.state.loading) {
-            form = <Spinner/> 
+            form = <Spinner />
         }
         return (
             <div className={classes.ContactData}>
                 <h4> Enter your contact Data </h4>
-             {form}
+                {form}
             </div>
         );
     }
