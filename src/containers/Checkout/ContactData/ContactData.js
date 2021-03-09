@@ -54,14 +54,13 @@ class ContactData extends Component {
                     options: [
                         {
                             value: 'fastest',
-                            displayValue: 'Fastest'
-                        }, 
+                            displayValue: 'fastest'
+                        },
                         {
-                            value: 'Cheapest',
-                            displayValue: 'Cheapest'
+                            value: 'cheapest',
+                            displayValue: 'cheapest'
                         }
                     ]
-
                 },
                 value: '',
             },
@@ -95,12 +94,44 @@ class ContactData extends Component {
             })
         })
     }
+    changedHandler = (event, id) => {
+        
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        }
+        //copy of nested objs
+         const updatedOrderFormEl = {
+            ...updatedOrderForm[id]
+        }
+        updatedOrderFormEl.value = event.target.value;
+        updatedOrderForm[id] = updatedOrderFormEl;
+        this.setState({
+            orderForm: updatedOrderForm
+        })
+    }
 
     render() {
+        const orderFormEl = [];
+        for (let x in this.state.orderForm) {
+            orderFormEl.push({
+                id: x,
+                config: this.state.orderForm[x]
+            })
+        }
+        console.log(orderFormEl)
         let form = (
             <form>
-                <Form elementType="..." elementConfig="..."  value="..." />
-                
+                {orderFormEl.map(x => {
+                    return (
+                        <Form
+                            key={x.id}
+                            elementType={x.config.elementType}
+                            elementConfig={x.config.elementConfig}
+                            value={x.config.value}
+                            changed={(event) => this.changedHandler(event, x.id)}
+                        />
+                    )
+                })}
                 <Button
                     btnType="Success"
                     clicked={this.orderhandler}
