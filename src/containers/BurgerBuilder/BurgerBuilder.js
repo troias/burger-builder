@@ -7,7 +7,6 @@ import OrderSummary from "../../components/Burger/OrderSummary/OrderSummary";
 import instance from '../../axios-orders'
 import Spinner from '../../components/UI/Spinner/Spinner'
 import withErrorHandler from '../../hoc/withErrorHandler/withErrorandler'
-import axios from "axios";
 import { connect } from 'react-redux'
 import { mapDispatchToProps } from '../BurgerBuilder/BurgerBuilderActions/BurgerBuilderActions'
 
