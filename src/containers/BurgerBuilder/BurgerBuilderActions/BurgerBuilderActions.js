@@ -1,4 +1,4 @@
-import * as actionTypes from '../../../store/actions/actions'
+import * as actionTypes from '../../../store/actions/actionTypes'
 
 export const mapDispatchToProps = dispatch => {
 
@@ -32,15 +32,3 @@ export const mapDispatchToProps = dispatch => {
 
 
   
-  // componentDidMount() {
-  
-  //   instance.get('/ingrediens.json').then(x => {
-  //     this.setState({
-  //       ingredients: x.data
-  //     })
-  //   }).catch(err => {
-  //     this.setState({
-  //       error: true
-  //     })
-  //   })
-  // }

@@ -79,7 +79,7 @@ class BurgerBuilder extends React.Component {
           />
         </Aux>
       );
-      }
+    }
 
     if (this.state.loading) {
       orderSummary = <Spinner />;

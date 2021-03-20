@@ -7,7 +7,7 @@ import { BrowserRouter } from "react-router-dom";
 import { combineReducers, createStore } from "redux";
 import { Provider } from "react-redux";
 import reducer from "./store/reducer/reducer";
-import burgerBuilderUiReducer from "./store/reducer/UiState/BurgerBuilder/BurgerBuilderUiReducer";
+
 
 const rootReducer = combineReducers({
   ing: reducer,
