@@ -1,16 +1,6 @@
 export const ADD_INGREDIENTS = "ADD_INGREDIENTS"
 export const REMOVE_INGREDIENTS = "REMOVE_INGREDIENTS" 
+export const SET_INGREDIENTS = "SET_INGREDIENTS"
+export const SET_ERROR_FAILED = "SET_ERROR_FAILED"
 
-
-export const add_ingredients = () => {
-    return { 
-
-     }
-}
-
-export const remove_ingredients = () => {
-       return { 
-        
-     }
-}
 

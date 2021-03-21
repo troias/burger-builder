@@ -10,14 +10,18 @@ import withErrorHandler from "../../hoc/withErrorHandler/withErrorandler";
 import { connect } from "react-redux";
 import { mapDispatchToProps } from "../BurgerBuilder/BurgerBuilderActions/BurgerBuilderActions";
 
+
+
 class BurgerBuilder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       purchasing: false,
-      loading: false,
-      error: false,
     };
+  }
+
+  componentDidMount() {
+    this.props.addInitialIngredients()
   }
 
   updatePurchaseState(ingredients) {
@@ -53,7 +57,7 @@ class BurgerBuilder extends React.Component {
 
     let orderSummary = null;
 
-    let burger = this.state.error ? <p> app is fucked </p> : <Spinner />;
+    let burger = this.props.error ? <p> app is fucked </p> : <Spinner />;
 
     if (this.props.ings) {
       orderSummary = (
@@ -100,6 +104,7 @@ const matchStateToProps = (state) => {
   return {
     ings: state.ing.ingredients,
     price: state.ing.totalPrice,
+    error: state.ing.error
   };
 };
 export default connect(
