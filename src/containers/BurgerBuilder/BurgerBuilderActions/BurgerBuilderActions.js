@@ -7,7 +7,8 @@ export const mapDispatchToProps = dispatch => {
     return {
         onAddIngredients: (ingName) => dispatch(actionCreators.addIngredients(ingName)),
         onRemoveIngredients: (ingName) => dispatch(actionCreators.removeIngredients(ingName)),
-        addInitialIngredients: () => dispatch (actionCreators.addInitialIngredients())
+        addInitialIngredients: () => dispatch (actionCreators.addInitialIngredients()),
+        onInitPurchase: () => dispatch(actionCreators.purchaseInit())
     }
 }
 

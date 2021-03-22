@@ -5,6 +5,8 @@ import instance from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Form from "../../../components/UI/Forms/Input/Input";
 import { connect } from "react-redux";
+import withErrorHandler from '../../../hoc/withErrorHandler/withErrorandler'
+import * as actionCreators from '../../../store/actions/index'
 
 class ContactData extends Component {
   state = {
@@ -98,15 +100,10 @@ class ContactData extends Component {
       },
     },
     formIsValid: false,
-    loading: false,
   };
 
   orderhandler = (event) => {
     event.preventDefault();
-
-    this.setState({
-      loading: true,
-    });
     const formData = {};
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[
@@ -119,20 +116,8 @@ class ContactData extends Component {
       price: this.props.price,
       orderData: formData,
     };
-    instance
-      .post("/orders.json", obj)
-      .then((x) => {
-        this.setState({
-          loading: false,
-        });
-        this.props.history.push("/");
-      })
-      .catch((err) => {
-        console.log(err);
-        this.setState({
-          loading: false,
-        });
-      });
+
+    this.props.onOrderBurger(obj)
   };
   changedHandler = (event, id) => {
     const updatedOrderForm = {
@@ -215,7 +200,7 @@ class ContactData extends Component {
         </Button>
       </form>
     );
-    if (this.state.loading) {
+    if (this.props.loading) {
       form = <Spinner />;
     }
     return (
@@ -231,7 +216,14 @@ const matchStateToProps = (state) => {
   return {
     ingredients: state.ing.ingredients,
     price: state.ing.totalPrice,
+    loading: state.order.loading
   };
 };
 
-export default connect(matchStateToProps)(ContactData);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onOrderBurger: (orderData) => dispatch(actionCreators.purchaseBurgerSuccess(orderData))
+  };
+};
+
+export default connect(matchStateToProps, mapDispatchToProps)(withErrorHandler(ContactData, instance))

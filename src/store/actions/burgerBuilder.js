@@ -1,7 +1,7 @@
 import * as actionTypes from "./actionTypes";
 import instance from "../../axios-orders";
 
-//ADD INITIAL INGREDIENTS
+//SET INITIAL INGREDIENTS
 
  const setIngredient = (ingName) => {
   return {
@@ -10,13 +10,15 @@ import instance from "../../axios-orders";
   };
 };
 
+
 //ERROR
 const setError = () => {
-     return {
-       type: actionTypes.SET_ERROR_FAILED,
-     };
-   };
+  return {
+    type: actionTypes.SET_ERROR_FAILED,
+  };
+};
 
+//ASYNC SET FUNCTION
 
 export const addInitialIngredients = () => {
   return (dispatch) => {

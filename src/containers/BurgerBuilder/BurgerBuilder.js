@@ -17,6 +17,7 @@ class BurgerBuilder extends React.Component {
     super(props);
     this.state = {
       purchasing: false,
+      loading: false
     };
   }
 
@@ -32,7 +33,7 @@ class BurgerBuilder extends React.Component {
       .reduce((sum, el) => {
         return sum + el;
       }, 0);
-    return sum > 0;
+    return sum > 0 ;
   }
 
   purchaseHandler = () => {
@@ -44,7 +45,9 @@ class BurgerBuilder extends React.Component {
   };
 
   purchaseContinueHandler = (props) => {
+    this.props.onInitPurchase()
     this.props.history.push("/checkout");
+
   };
 
   render() {
@@ -56,6 +59,8 @@ class BurgerBuilder extends React.Component {
     }
 
     let orderSummary = null;
+     
+  
 
     let burger = this.props.error ? <p> app is fucked </p> : <Spinner />;
 
