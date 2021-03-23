@@ -104,13 +104,15 @@ class ContactData extends Component {
 
   orderhandler = (event) => {
     event.preventDefault();
+
     const formData = {};
+
     for (let formElementIdentifier in this.state.orderForm) {
       formData[formElementIdentifier] = this.state.orderForm[
         formElementIdentifier
       ].value;
     }
-    // alert("you continued")
+  
     const obj = {
       ingredients: this.props.ingredients,
       price: this.props.price,
@@ -119,6 +121,7 @@ class ContactData extends Component {
 
     this.props.onOrderBurger(obj)
   };
+  
   changedHandler = (event, id) => {
     const updatedOrderForm = {
       ...this.state.orderForm,

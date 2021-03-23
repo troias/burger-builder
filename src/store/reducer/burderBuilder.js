@@ -1,4 +1,5 @@
 import * as actionTypes from "../actions/actionTypes";
+import { updateObject } from '../utility/utility'
 
 const intialState = {
   ingredients: null,
@@ -16,46 +17,41 @@ const ingredient_prices = {
 const reducer = (state = intialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_INGREDIENTS:
-      const newState = {
-        ...state,
-        ingredients: {
-          ...state.ingredients,
-          [action.ingredientName]: state.ingredients[action.ingredientName] + 1,
-        },
+      const updatedIngredient = { [action.ingredientName]: state.ingredients[action.ingredientName] + 1 }
+      const updatedIngredients = updateObject(state.ingredients, updatedIngredient)
+      const updatedStateAdd = {
+        ingredients: updatedIngredients,
         totalPrice: state.totalPrice + ingredient_prices[action.ingredientName],
-      };
-      return newState;
+      }
+      return updateObject(state, updatedStateAdd);
+
     case actionTypes.REMOVE_INGREDIENTS:
-      const removeIng = {
-        ...state,
+      const updatedIng = { [action.ingredientName]: state.ingredients[action.ingredientName] - 1 }
+      const updatedIngs = updateObject(state.ingredients, updatedIng)
+      const updatedStateRed = {
+        ingredients: updatedIngs,
+        totalPrice: state.totalPrice + ingredient_prices[action.ingredientName],
+      }
+      return updateObject(state, updatedStateRed);
+
+    case actionTypes.SET_INGREDIENTS:
+      const set_ings = {
         ingredients: {
-          ...state.ingredients,
-          [action.ingredientName]: state.ingredients[action.ingredientName] - 1,
+          salad: action.ingredientName.salad,
+          bacon: action.ingredientName.bacon,
+          cheese: action.ingredientName.cheese,
+          meat: action.ingredientName.meat,
         },
-        totalPrice: state.totalPrice - ingredient_prices[action.ingredientName],
+        totalPrice: 4,
+        error: false
+
+
       };
-      return removeIng;
+      return updateObject(state, set_ings)
 
-      case actionTypes.SET_INGREDIENTS:
-        return {
-            ...state, 
-            ingredients: {
-              salad: action.ingredientName.salad,
-              bacon: action.ingredientName.bacon,
-              cheese: action.ingredientName.cheese,
-              meat: action.ingredientName.meat,
-            }, 
-            totalPrice: 4,
-            error: false
+    case actionTypes.SET_ERROR_FAILED:
+      return updateObject(state, { error: true })
 
-           
-        };
-        
-        case actionTypes.SET_ERROR_FAILED:
-            return {
-                ...state,
-                error: true
-            }
   }
   return state;
 };
