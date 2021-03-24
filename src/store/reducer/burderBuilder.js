@@ -2,6 +2,7 @@ import * as actionTypes from "../actions/actionTypes";
 import * as utilityFunctions from './utilityFunctions/BurgerBuilderUtilityFunctions'
 
 const intialState = {
+
   ingredients: null,
   totalPrice: 0,
   error: false,
@@ -11,9 +12,11 @@ const intialState = {
     meat: 1.3,
     bacon: 0.7,
   }
+  
 }
 
 const reducer = (state = intialState, action) => {
+
   switch (action.type) {
 
     case actionTypes.ADD_INGREDIENTS: return utilityFunctions.addIngredients(state, action)
