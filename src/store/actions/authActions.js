@@ -29,6 +29,27 @@ export const authFail = (error) => {
 export const auth = (email, password) => {
     return dispatch => {
         dispatch(authStart())
-
+        const authData = {
+            email: email, 
+            password: password, 
+            returnSecurePassword: true
+        }
+        instance.post( "",  authData).then(response => {
+            dispatch(authSuccess(response.data))
+            console.log(response)
+           })   .catch( err => {
+            console.log(err)
+            dispatch(authFail(err))
+           })
     };
+    
 };
+
+
+
+
+   
+
+
+  
+ 

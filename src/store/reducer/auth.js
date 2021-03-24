@@ -3,9 +3,6 @@ import * as utilityFunctions from './utilityFunctions/BurgerBuilderUtilityFuncti
 
 const intialState = {
 
- 
- 
-    
   }
 
   const reducer = (state = intialState, action) => {

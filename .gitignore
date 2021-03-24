@@ -23,5 +23,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#Axios
+
 /src/axios-auth.js
 /src/axios-orders.js
