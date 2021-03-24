@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 import * as actionCreators from '../../store/actions/index'
 
 
+
 class Auth extends React.Component {
     state = {
         orderForm: {
