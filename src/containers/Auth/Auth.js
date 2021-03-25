@@ -138,7 +138,7 @@ class Auth extends React.Component {
             form = <Spinner />
 
         }
-        // ------------------
+     
         let errorMessage = null
 
         if (this.props.error) {
@@ -148,7 +148,7 @@ class Auth extends React.Component {
        )
         }
         console.log(errorMessage)
-        // --------------------
+      
         return (
             <div className={classes.Auth} >
                 {errorMessage}

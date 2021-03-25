@@ -25,3 +25,11 @@ export const authFail = (state, action) => {
   }
   return updateObject(state, error);
 }
+
+export const authLogOut = (state, action) => {
+  const logOut = {
+    token: null, 
+    userID: null
+  }
+  return updateObject(state, logOut);
+}
