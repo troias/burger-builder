@@ -94,7 +94,7 @@ class Auth extends React.Component {
             this.state.orderForm.email.value,
             this.state.orderForm.password.value,
             this.state.isSignUp
-            )
+        )
     }
 
     switchAuthModeHandler = () => {
@@ -131,7 +131,7 @@ class Auth extends React.Component {
 
             )
         })
-
+  
         return (
             <div className={classes.Auth} >
                 <form onSubmit={this.onSubmitHandler} >
@@ -151,6 +151,12 @@ const mapDispatchToProps = dispatch => {
         onAuth: (email, password, isSignUp) => dispatch(actionCreators.auth(email, password, isSignUp))
     }
 }
+
+// const mapStateToProps = state => {
+//     return {
+//         // auth: state.auth.token
+//     }
+// }
 
 
 

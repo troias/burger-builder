@@ -9,11 +9,11 @@ export const authStart = () => {
 };
 
 
-export const authSuccess = (authData) => {
-    console.log(authData)
+export const authSuccess = (token, userId) => {
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData,
+        idToken: token,
+        userId: userId
       
     };
 };
@@ -22,7 +22,7 @@ export const authSuccess = (authData) => {
 export const authFail = (error) => {
     return {
         type: actionTypes.AUTH_FAIL,
-        error
+        error: error
     };
 };
 
@@ -42,7 +42,7 @@ export const auth = (email, password, isSignUp) => {
             url = (authData) => signIn.post("", authData)
         }
         url(authData).then(response => {
-            dispatch(authSuccess(response.data))
+            dispatch(authSuccess(response.data.idToken, response.data.localId))
             console.log(response)
            })   .catch( err => {
             console.log(err)

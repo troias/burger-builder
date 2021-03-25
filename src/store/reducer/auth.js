@@ -1,7 +1,11 @@
 import * as actionTypes from "../actions/actionTypes";
-import * as utilityFunctions from './utilityFunctions/BurgerBuilderUtilityFunctions'
+import * as utilityFunctions from './utilityFunctions/AuthUtilityFunctions'
 
 const intialState = {
+    token: null,
+    userID: null, 
+    error: null,
+    loading: false
 
   }
 
@@ -9,12 +13,11 @@ const intialState = {
 
     switch (action.type) {
   
-      case actionTypes.AUTH_START: return utilityFunctions.addIngredients(state, action)
-      case actionTypes.AUTH_SUCCESS: return utilityFunctions.removeIngredients(state, action)
-      case actionTypes.AUTH_FAIL: return utilityFunctions.setIngredients(state, action)
-
+      case actionTypes.AUTH_START: return utilityFunctions.authStart(state, action)
+      case actionTypes.AUTH_SUCCESS: return utilityFunctions.authSuccess(state, action)
+      case actionTypes.AUTH_FAIL: return utilityFunctions.authFail(state, action)
+      default: return state
     }
-    return state;
   };
   
   export default reducer;

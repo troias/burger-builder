@@ -1,6 +1,27 @@
 import { updateObject } from '../../utility/utility'
 
-export const addIngredients = (state, action) => {
- 
-    return updateObject(state, );
+export const authStart = (state, action) => {
+  const loading = {
+    loading: true,
+    error: null
   }
+  return updateObject(state, loading);
+}
+
+export const authSuccess = (state, action) => {
+  const authDetails = {
+    token: action.idToken,
+    userID: action.userId,
+    loading: false, 
+    error: null
+  }
+  return updateObject(state, authDetails);
+}
+
+export const authFail = (state, action) => {
+  const error = { 
+    error: action.error, 
+    loading: false 
+  }
+  return updateObject(state, error);
+}
