@@ -1,5 +1,5 @@
 import * as actionTypes from './actionTypes'
-import instance from '../../axios-auth'
+import {signIn, signUp} from '../../axios-auth'
 
 export const authStart = () => {
     return {
@@ -10,9 +10,11 @@ export const authStart = () => {
 
 
 export const authSuccess = (authData) => {
+    console.log(authData)
     return {
         type: actionTypes.AUTH_SUCCESS,
-        authData: authData
+        authData: authData,
+      
     };
 };
 
@@ -26,7 +28,7 @@ export const authFail = (error) => {
 
 ///ASYNC
 
-export const auth = (email, password) => {
+export const auth = (email, password, isSignUp) => {
     return dispatch => {
         dispatch(authStart())
         const authData = {
@@ -34,7 +36,12 @@ export const auth = (email, password) => {
             password: password, 
             returnSecurePassword: true
         }
-        instance.post( "",  authData).then(response => {
+
+        let url = (authData) => signUp.post("", authData) 
+        if (!isSignUp )  {
+            url = (authData) => signIn.post("", authData)
+        }
+        url(authData).then(response => {
             dispatch(authSuccess(response.data))
             console.log(response)
            })   .catch( err => {

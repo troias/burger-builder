@@ -38,7 +38,8 @@ class Auth extends React.Component {
                 valid: false,
                 touched: false
             }
-        }
+        },
+        isSignUp: true
 
     }
 
@@ -89,8 +90,19 @@ class Auth extends React.Component {
 
     onSubmitHandler = (event) => {
         event.preventDefault()
-        this.props.onAuth(this.state.orderForm.email.value,
-            this.state.orderForm.password.value)
+        this.props.onAuth(
+            this.state.orderForm.email.value,
+            this.state.orderForm.password.value,
+            this.state.isSignUp
+            )
+    }
+
+    switchAuthModeHandler = () => {
+        this.setState(prevState => {
+            return {
+                isSignUp: !prevState.isSignUp
+            }
+        })
     }
 
     render() {
@@ -126,13 +138,17 @@ class Auth extends React.Component {
                     {form}
                     <Button btnType="Success"> SUBMIT </Button>
                 </form>
+                <Button
+                    clicked={this.switchAuthModeHandler}
+                    btnType="Danger"> SWITCH TO {this.state.isSignUp ? 'SIGN-IN' : 'SIGN-UP'}
+                </Button>
             </div>
         );
     }
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password) => dispatch(actionCreators.auth(email, password))
+        onAuth: (email, password, isSignUp) => dispatch(actionCreators.auth(email, password, isSignUp))
     }
 }
 
