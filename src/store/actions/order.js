@@ -31,11 +31,10 @@ export const onPurchaseStart = () => {
 
 //ASYNC
 
-export const purchaseBurgerSuccess = (orderData) => {
+export const purchaseBurgerSuccess = (orderData, token) => {
     return (dispatch) => {
         dispatch(onPurchaseStart())
-        instance.post("/orders.json", orderData).then((res) => {
-            console.log(res.data)
+        instance.post("/orders.json?auth=" + token, orderData).then((res) => {
             dispatch(setOrder(res.data.name, orderData));
         })
             .catch((err) => {
@@ -62,6 +61,7 @@ export const fetchOrdersStart = () => {
 }
 
 export const fetchOrdersSuccess = (orders) => {
+   console.log('Orders' + orders)
     return {
         type: actionTypes.FETCH_ORDERS_SUCCESS,
         orders: orders
@@ -79,10 +79,10 @@ export const fetchOrdersFail = (error) => {
 
 ///ASYNC
 
-export const fetchOrders = () => {
+export const fetchOrders = (token) => {
     return dispatch => {
         dispatch(fetchOrdersStart())
-        instance.get("/orders.json").then((res) => {
+        instance.get("/orders.json?auth=" + token).then((res) => {
             let fetchedOrders = []
             for (let key in res.data) {
                 fetchedOrders.push({

@@ -5,7 +5,8 @@ const intialState = {
     token: null,
     userID: null, 
     error: null,
-    loading: false
+    loading: false, 
+    LoggedIn: false,
 
   }
 

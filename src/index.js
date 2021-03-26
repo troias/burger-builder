@@ -18,11 +18,14 @@ const rootReducer = combineReducers({
   auth: auth
 });
 
-const composeEnchancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const composeEnchancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+  trace: true,
+  traceLimit: 25
+}) || compose;
 
 const store = createStore(
   rootReducer, composeEnchancer(applyMiddleware(ReduxThunk))
-  
+
 );
 
 const app = (

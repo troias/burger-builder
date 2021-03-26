@@ -32,18 +32,19 @@ export const purchaseBurgerFail = (state,action) => {
 
 export const fetchOrdersStart= (state,action) => {
 
-    return updateObject(state, { loading: true })
+    return updateObject(state, { 
+        loading: true 
+        })
 }
 
-export const fetchOrdersSuccess= (state,action) => {
+export const fetchOrdersSuccess = ( state, action ) => {
 
-    const order_succ = {
+    console.log('test' + action.orders)
+    return updateObject( state, {
         orders: action.orders,
         loading: false
-    }
-
-    return updateObject(state, order_succ)
-}
+    } );
+};
 
 export const fetchOrdersFail= (state,action) => {
     const order_fail = {

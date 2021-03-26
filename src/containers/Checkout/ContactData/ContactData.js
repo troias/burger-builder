@@ -119,7 +119,7 @@ class ContactData extends Component {
       orderData: formData,
     };
 
-    this.props.onOrderBurger(obj)
+    this.props.onOrderBurger(obj, this.props.token)
   };
   
   changedHandler = (event, id) => {
@@ -143,7 +143,6 @@ class ContactData extends Component {
     for (let x in updatedOrderForm) {
       formIsValid = updatedOrderForm[x].valid && formIsValid;
     }
-    console.log(formIsValid);
     this.setState({
       orderForm: updatedOrderForm,
       formIsValid: formIsValid,
@@ -219,13 +218,15 @@ const matchStateToProps = (state) => {
   return {
     ingredients: state.ing.ingredients,
     price: state.ing.totalPrice,
-    loading: state.order.loading
+    loading: state.order.loading, 
+    token: state.auth.token, 
+    userId: state.auth.userId
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onOrderBurger: (orderData) => dispatch(actionCreators.purchaseBurgerSuccess(orderData))
+    onOrderBurger: (orderData, token, userId ) => dispatch(actionCreators.purchaseBurgerSuccess(orderData, token))
   };
 };
 
