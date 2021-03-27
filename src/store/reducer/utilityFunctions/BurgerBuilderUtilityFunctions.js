@@ -6,6 +6,7 @@ export const addIngredients = (state, action) => {
     const updatedStateAdd = {
       ingredients: updatedIngredients,
       totalPrice: state.totalPrice + state.ingredient_prices[action.ingredientName],
+      building: true
     }
     return updateObject(state, updatedStateAdd);
   }
@@ -29,7 +30,8 @@ export const addIngredients = (state, action) => {
         meat: action.ingredientName.meat,
       },
       totalPrice: 4,
-      error: false
+      error: false, 
+      building: false
     };
     return updateObject(state, set_ings)
   

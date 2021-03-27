@@ -7,6 +7,7 @@ const intialState = {
     error: null,
     loading: false, 
     LoggedIn: false,
+    authRedirectPath: '/'
 
   }
 
@@ -18,6 +19,8 @@ const intialState = {
       case actionTypes.AUTH_SUCCESS: return utilityFunctions.authSuccess(state, action)
       case actionTypes.AUTH_FAIL: return utilityFunctions.authFail(state, action)
       case actionTypes.LOG_OUT: return utilityFunctions.authLogOut(state, action)
+      case actionTypes.SET_AUTH_REDIRECT_PATH: return utilityFunctions.setAuthRedirectPath(state, action) 
+      
       default: return state
     }
   };

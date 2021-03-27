@@ -6,6 +6,8 @@ const intialState = {
   ingredients: null,
   totalPrice: 0,
   error: false,
+  building: false, 
+  
   ingredient_prices: {
     salad: 0.5,
     cheese: 0.4,

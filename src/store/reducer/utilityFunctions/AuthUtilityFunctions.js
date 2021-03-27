@@ -33,3 +33,10 @@ export const authLogOut = (state, action) => {
   }
   return updateObject(state, logOut);
 }
+
+export const setAuthRedirectPath = (state, action) => {
+  const authRedirect = {
+    authRedirectPath: action.path.authRedirectPath
+  }
+  return updateObject(state, authRedirect);
+}

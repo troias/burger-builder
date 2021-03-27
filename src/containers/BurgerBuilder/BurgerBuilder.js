@@ -37,7 +37,12 @@ class BurgerBuilder extends React.Component {
   }
 
   purchaseHandler = () => {
-    this.setState({ purchasing: true });
+    if (this.props.isAuthenticated) {
+      this.setState({ purchasing: true });
+    } else {
+      this.props.onSetAuthRedirect('/checkout')
+      this.props.history.push('/auth')
+    }
   };
 
   purchaseCancelHandler = () => {
@@ -84,6 +89,7 @@ class BurgerBuilder extends React.Component {
             purchaseable={this.updatePurchaseState(this.props.ings)}
             price={this.props.price}
             ordered={this.purchaseHandler}
+            isAuth={this.props.isAuthenticated}
             // this.props.onPurcaseable(this.props.ings
           />
         </Aux>
@@ -109,7 +115,8 @@ const matchStateToProps = (state) => {
   return {
     ings: state.ing.ingredients,
     price: state.ing.totalPrice,
-    error: state.ing.error
+    error: state.ing.error, 
+    isAuthenticated: state.auth.token !== null, 
   };
 };
 export default connect(

@@ -8,7 +8,8 @@ export const mapDispatchToProps = dispatch => {
         onAddIngredients: (ingName) => dispatch(actionCreators.addIngredients(ingName)),
         onRemoveIngredients: (ingName) => dispatch(actionCreators.removeIngredients(ingName)),
         addInitialIngredients: () => dispatch (actionCreators.addInitialIngredients()),
-        onInitPurchase: () => dispatch(actionCreators.purchaseInit())
+        onInitPurchase: () => dispatch(actionCreators.purchaseInit()), 
+        onSetAuthRedirect: (path) => dispatch(actionCreators.auth(path)),
     }
 }
 

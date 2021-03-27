@@ -5,6 +5,7 @@ import classes from './Auth.module.css'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../store/actions/index'
 import Spinner from '../../components/UI/Spinner/Spinner'
+import { Redirect } from 'react-router';
 
 
 
@@ -106,6 +107,12 @@ class Auth extends React.Component {
         })
     }
 
+    componentDidMount() {
+        if (!this.props.buildingBurger && this.props.authRedirectPath !== '/') {
+            this.props.onSetAuthRedirectPath()
+        }
+    }
+
     render() {
 
         const formElementsArray = [];
@@ -138,20 +145,28 @@ class Auth extends React.Component {
             form = <Spinner />
 
         }
-     
+
         let errorMessage = null
 
         if (this.props.error) {
 
-       errorMessage = (
-           <p>{this.props.error.message}</p>
-       )
+            errorMessage = (
+                <p>{this.props.error.message}</p>
+            )
         }
-        console.log(errorMessage)
-      
+
+        let authRedirect = null
+
+        if (this.props.isAuthenticated) {
+            authRedirect = <Redirect to={this.props.authRedirectPath} />
+        }
+       
+
+
         return (
             <div className={classes.Auth} >
                 {errorMessage}
+                {authRedirect}
                 <form onSubmit={this.onSubmitHandler} >
                     {form}
                     <Button btnType="Success"> SUBMIT </Button>
@@ -166,7 +181,9 @@ class Auth extends React.Component {
 }
 const mapDispatchToProps = dispatch => {
     return {
-        onAuth: (email, password, isSignUp) => dispatch(actionCreators.auth(email, password, isSignUp))
+        onAuth: (email, password, isSignUp) => dispatch(actionCreators.auth(email, password, isSignUp)),
+        onSetAuthRedirectPath: () => dispatch(actionCreators.setAuthRedirectPath('/'))
+        
     }
 }
 
@@ -174,7 +191,10 @@ const mapStateToProps = state => {
     return {
         auth: state.auth.token,
         loading: state.auth.loading,
-        error: state.auth.error
+        error: state.auth.error,
+        isAuthenticated: state.auth.token !== null, 
+        buildingBurger: state.ing.building, 
+        authRedirectPath: state.auth.authRedirect
     }
 }
 
