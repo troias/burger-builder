@@ -36,7 +36,7 @@ export const authLogOut = (state, action) => {
 
 export const setAuthRedirectPath = (state, action) => {
   const authRedirect = {
-    authRedirectPath: action.path.authRedirectPath
+    authRedirectPath: action.path
   }
   return updateObject(state, authRedirect);
 }

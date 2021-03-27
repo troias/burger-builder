@@ -9,7 +9,7 @@ export const mapDispatchToProps = dispatch => {
         onRemoveIngredients: (ingName) => dispatch(actionCreators.removeIngredients(ingName)),
         addInitialIngredients: () => dispatch (actionCreators.addInitialIngredients()),
         onInitPurchase: () => dispatch(actionCreators.purchaseInit()), 
-        onSetAuthRedirect: (path) => dispatch(actionCreators.auth(path)),
+        onSetAuthRedirect: (path) => dispatch(actionCreators.setAuthRedirectPath(path)),
     }
 }
 
