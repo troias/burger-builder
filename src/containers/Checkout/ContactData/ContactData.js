@@ -7,6 +7,8 @@ import Form from "../../../components/UI/Forms/Input/Input";
 import { connect } from "react-redux";
 import withErrorHandler from '../../../hoc/withErrorHandler/withErrorandler'
 import * as actionCreators from '../../../store/actions/index'
+import { updateObject } from '../../../shared/utility'
+import { checkValidationHandler} from '../../../shared/utility'
 
 class ContactData extends Component {
   state = {
@@ -112,7 +114,7 @@ class ContactData extends Component {
         formElementIdentifier
       ].value;
     }
-  
+
     const obj = {
       ingredients: this.props.ingredients,
       price: this.props.price,
@@ -122,23 +124,22 @@ class ContactData extends Component {
 
     this.props.onOrderBurger(obj, this.props.token)
   };
-  
-  changedHandler = (event, id) => {
-    const updatedOrderForm = {
-      ...this.state.orderForm,
-    };
-    //copy of nested objs
-    const updatedOrderFormEl = {
-      ...updatedOrderForm[id],
-    };
-    updatedOrderFormEl.value = event.target.value;
-    updatedOrderFormEl.valid = this.checkValidationHandler(
-      updatedOrderFormEl.value,
-      updatedOrderFormEl.validation
-    );
-    updatedOrderFormEl.touched = true;
-    updatedOrderForm[id] = updatedOrderFormEl;
 
+  changedHandler = (event, id) => {
+   
+    //copy of nested objs
+    const updatedOrderFormEl = updateObject(this.state.orderForm[id], {
+     
+     value: event.target.value ,
+     valid: checkValidationHandler( event.target.value, this.state.orderForm[id].validation),
+     touched:  true,
+     
+    })
+
+    const updatedOrderForm = updateObject(this.state.orderForm, {
+      [id]: updatedOrderFormEl,
+    })
+    
     let formIsValid = true;
 
     for (let x in updatedOrderForm) {
@@ -150,23 +151,7 @@ class ContactData extends Component {
     });
   };
 
-  checkValidationHandler(value, validation) {
-    let isValid = true;
 
-    if (validation.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-
-    if (validation.minLength) {
-      isValid = value.length >= validation.minLength && isValid;
-    }
-
-    if (validation.maxLength) {
-      isValid = value.length <= validation.maxLength && isValid;
-    }
-
-    return isValid;
-  }
 
   render() {
     const orderFormEl = [];
@@ -219,15 +204,15 @@ const matchStateToProps = (state) => {
   return {
     ingredients: state.ing.ingredients,
     price: state.ing.totalPrice,
-    loading: state.order.loading, 
-    token: state.auth.token, 
+    loading: state.order.loading,
+    token: state.auth.token,
     userId: state.auth.userID
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onOrderBurger: (orderData, token, userId ) => dispatch(actionCreators.purchaseBurgerSuccess(orderData, token))
+    onOrderBurger: (orderData, token) => dispatch(actionCreators.purchaseBurgerSuccess(orderData, token))
   };
 };
 

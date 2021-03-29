@@ -1,4 +1,4 @@
-import { updateObject } from '../../utility/utility'
+import { updateObject } from '../../../shared/utility'
 
 export const addIngredients = (state, action) => {
     const updatedIngredient = { [action.ingredientName]: state.ingredients[action.ingredientName] + 1 }

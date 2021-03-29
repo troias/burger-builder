@@ -4,15 +4,15 @@ mobile-content
     margin: 10px 0;
     box-sizing: border-box;
     display: block;
-    width: 100%;
+    width: auto;
+    margin: auto;
+   
 }
 
 .NavigationItem a {
     color: white;
     text-decoration: none;
     height:100%;
-    padding: 16px 10px;
-    border-bottom: 4px solid transparent;
     box-sizing: border-box;
     display: block;
 }
@@ -43,7 +43,6 @@ mobile-content
     .NavigationItem {
         margin: 0;
         display: flex;
-        flex-direction: column;
         height: 100%;
         width: auto;
         align-items: center;
@@ -54,7 +53,6 @@ mobile-content
         height:100%;
         padding: 16px 10px;
         border-bottom: 4px solid transparent;
-        width: auto;
        
     }
     

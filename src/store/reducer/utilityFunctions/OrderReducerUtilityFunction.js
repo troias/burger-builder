@@ -1,4 +1,4 @@
-import { updateObject } from '../../utility/utility'
+import { updateObject } from '../../../shared/utility'
 
 export const purchaseInit= (state,action) => {
 
@@ -39,7 +39,7 @@ export const fetchOrdersStart= (state,action) => {
 
 export const fetchOrdersSuccess = ( state, action ) => {
 
-    console.log('test' + action.orders)
+  
     return updateObject( state, {
         orders: action.orders,
         loading: false

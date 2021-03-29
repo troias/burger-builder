@@ -61,7 +61,7 @@ export const fetchOrdersStart = () => {
 }
 
 export const fetchOrdersSuccess = (orders) => {
-   console.log('Orders' + orders)
+
     return {
         type: actionTypes.FETCH_ORDERS_SUCCESS,
         orders: orders

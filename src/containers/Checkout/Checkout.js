@@ -6,10 +6,7 @@ import { connect } from "react-redux";
 
 
 class Checkout extends React.Component {
-
-
-
-
+  
   onCheckoutSuccessHandler = () => {
     this.props.history.replace("/checkout/contact-data");
   };

@@ -4,7 +4,8 @@
     list-style: none;
     display: flex;
     flex-flow: column;
-    align-items: center;
+    align-items: inherit;
+    text-align: center;
     height: 100%;
    
   
@@ -13,6 +14,6 @@
 @media (min-width: 500px) {
     .NavigationItems {
         flex-flow: row;
-        
+
     }
 }

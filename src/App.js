@@ -34,9 +34,10 @@ class App extends React.Component {
     if (this.props.isAuthenticated) {
           routes = (
             <Switch>
-              <Route path={'/checkout'} component={Checkout} />
+              <Route path={'/checkout'}  component={Checkout} />
               <Route path={'/logout'}  component={LogOut} />
               <Route path={'/orders'} component={Orders} />
+              <Route path={'/auth'}  component={Auth} />
               <Route path={'/'} exact component={BurgerBuilder} />
               <Redirect to={'/'} />
             </Switch>

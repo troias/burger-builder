@@ -1,4 +1,4 @@
-import { updateObject } from '../../utility/utility'
+import { updateObject } from '../../../shared/utility'
 
 export const authStart = (state, action) => {
   const loading = {

@@ -18,10 +18,10 @@ const rootReducer = combineReducers({
   auth: auth
 });
 
-const composeEnchancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+const composeEnchancer = process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
   trace: true,
   traceLimit: 25
-}) || compose;
+}) : null || compose 
 
 const store = createStore(
   rootReducer, composeEnchancer(applyMiddleware(ReduxThunk))

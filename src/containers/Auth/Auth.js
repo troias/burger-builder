@@ -5,8 +5,9 @@ import classes from './Auth.module.css'
 import { connect } from 'react-redux'
 import * as actionCreators from '../../store/actions/index'
 import Spinner from '../../components/UI/Spinner/Spinner'
-import { Redirect } from 'react-router';
-
+import { Redirect } from 'react-router'
+import { updateObject }  from '../../shared/utility'
+import { checkValidationHandler} from '../../shared/utility'
 
 
 class Auth extends React.Component {
@@ -45,46 +46,16 @@ class Auth extends React.Component {
 
     }
 
-    checkValidationHandler(eventValue, validation) {
-        let isValid = true;
-
-        if (validation.required) {
-            isValid = eventValue.trim() !== "" && isValid;
-        }
-
-        if (validation.minLength) {
-            isValid = eventValue.length >= validation.minLength && isValid;
-        }
-
-        if (validation.maxLength) {
-            isValid = eventValue.length <= validation.maxLength && isValid;
-        }
-
-        if (validation.isEmail) {
-            const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-            isValid = pattern.test(eventValue) && isValid
-        }
-
-        if (validation.isNumeric) {
-            const pattern = /^\d+$/;
-            isValid = pattern.test(eventValue) && isValid
-        }
-
-        return isValid;
-    }
 
     inputChangedHandler = (event, orderForm) => {
-        const updatedControls = {
-            ...this.state.orderForm,
-            [orderForm]: {
-                ...this.state.orderForm[orderForm],
+
+        const updatedControls = updateObject(this.state.orderForm, {
+            [orderForm]: updateObject(this.state.orderForm[orderForm], {
                 value: event.target.value,
-                valid: this.checkValidationHandler(event.target.value, this.state.orderForm[orderForm].validation),
+                valid: checkValidationHandler(event.target.value, this.state.orderForm[orderForm].validation),
                 touched: true
-            }
-
-        }
-
+            }) 
+        } )
         this.setState({
             orderForm: updatedControls
         })
