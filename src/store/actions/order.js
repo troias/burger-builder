@@ -79,10 +79,11 @@ export const fetchOrdersFail = (error) => {
 
 ///ASYNC
 
-export const fetchOrders = (token) => {
+export const fetchOrders = (token, userId) => {
     return dispatch => {
         dispatch(fetchOrdersStart())
-        instance.get("/orders.json?auth=" + token).then((res) => {
+        const queryParams = '?auth=' + token + '&orderBy="userId"&equalTo"' + userId + '"'
+        instance.get("/orders.json" + queryParams ).then((res) => {
             let fetchedOrders = []
             for (let key in res.data) {
                 fetchedOrders.push({

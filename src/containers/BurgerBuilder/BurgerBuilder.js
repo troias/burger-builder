@@ -22,7 +22,10 @@ class BurgerBuilder extends React.Component {
   }
 
   componentDidMount() {
-    this.props.addInitialIngredients()
+    if (!this.props.building) {
+      this.props.addInitialIngredients()
+    }
+    
   }
 
   updatePurchaseState(ingredients) {
@@ -117,6 +120,7 @@ const matchStateToProps = (state) => {
     price: state.ing.totalPrice,
     error: state.ing.error, 
     isAuthenticated: state.auth.token !== null, 
+    building: state.ing.building
   };
 };
 export default connect(
