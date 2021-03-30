@@ -8,9 +8,9 @@ const intialState = {
     loading: false, 
     LoggedIn: false,
     authRedirectPath: '/'
-
   }
 
+  
   const reducer = (state = intialState, action) => {
 
     switch (action.type) {

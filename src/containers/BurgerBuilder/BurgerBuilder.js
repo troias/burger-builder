@@ -12,7 +12,7 @@ import { mapDispatchToProps } from "../BurgerBuilder/BurgerBuilderActions/Burger
 
 
 
-class BurgerBuilder extends React.Component {
+export class BurgerBuilder extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -117,8 +117,7 @@ const matchStateToProps = (state) => {
     price: state.ing.totalPrice,
     error: state.ing.error, 
     isAuthenticated: state.auth.token !== null, 
-    building: state.ing.building, 
-    purchased: state.ing.purchased
+   
   };
 };
 export default connect(
