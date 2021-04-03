@@ -31,12 +31,12 @@ export const authFail = (error) => {
 
 export const logOut = () => {
 
-    localStorage.removeItem('token')
-    localStorage.removeItem('expirationData')
-    localStorage.removeItem('userId')
+    // localStorage.removeItem('token')
+    // localStorage.removeItem('expirationData')
+    // localStorage.removeItem('userId')
 
     return {
-        type: actionTypes.LOG_OUT,
+        type: actionTypes.AUTH_INIT_LOGOUT,
     }
 }
 export const checkAuthTimeOut = (expirationTime) => {
