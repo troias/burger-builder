@@ -1,10 +1,9 @@
 import * as actionTypes from './actionTypes'
-import { signIn, signUp } from '../../axios-auth'
+
 
 export const authStart = () => {
     return {
         type: actionTypes.AUTH_START,
-
     };
 };
 
@@ -30,54 +29,31 @@ export const authFail = (error) => {
 ///ASYNC
 
 export const logOut = () => {
-
-    // localStorage.removeItem('token')
-    // localStorage.removeItem('expirationData')
-    // localStorage.removeItem('userId')
-
     return {
         type: actionTypes.AUTH_INIT_LOGOUT,
     }
 }
-export const checkAuthTimeOut = (expirationTime) => {
-    return dispatch => {
-        setTimeout(() => {
-            dispatch(logOut())
-        }, expirationTime * 1000)
+
+export const logOutSucceed = () => {
+    return {
+        type: actionTypes.LOG_OUT,
     }
 }
 
+export const checkAuthTimeOut = (expirationTime) => {
+    return {
+        type: actionTypes.AUTH_CHECK_TIMEOUT,
+        expirationTime: expirationTime
+    }
+   
+}
+
 export const auth = (email, password, isSignUp) => {
-    return dispatch => {
-        dispatch(authStart())
-
-
-
-        const authData = {
-            email: email,
-            password: password,
-            returnSecureToken: true
-        }
-
-        let url = (authData) => signUp.post("", authData)
-        if (!isSignUp) {
-            url = (authData) => signIn.post("", authData)
-        }
-
-        url(authData).then(response => {
-
-            const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
-
-            localStorage.setItem('token', response.data.idToken)
-            localStorage.setItem('expirationData', expirationDate)
-            localStorage.setItem('userId', response.data.localId)
-
-            dispatch(authSuccess(response.data.idToken, response.data.localId))
-            dispatch(checkAuthTimeOut(response.data.expiresIn))
-          
-        }).catch(err => {
-            dispatch(authFail(err.response.data.error))
-        })
+    return  {
+       type: actionTypes.AUTH_USER, 
+       email: email, 
+       password: password, 
+       isSignUp: isSignUp
     };
 
 };
