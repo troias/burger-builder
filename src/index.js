@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import "./index.css";
 
 import createSagaMiddleware from 'redux-saga' 
-import { watchAuth } from './store/sagas/index'
+import { watchAuth, watchBurgerBuilder, watchOrders } from './store/sagas/index'
 
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
@@ -37,6 +37,8 @@ const store = createStore(
 );
 
 sagaMiddleware.run(watchAuth)
+sagaMiddleware.run(watchBurgerBuilder)
+  sagaMiddleware.run(watchOrders)
 
 const app = (
   <Provider store={store}>

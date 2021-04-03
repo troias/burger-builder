@@ -1,35 +1,23 @@
 import * as actionTypes from "./actionTypes";
 import instance from "../../axios-orders";
 
+//ASYNC SET FUNCTION
+
+export const addInitialIngredients = () => {
+  return {
+    type: actionTypes.INIT_INGREDIENTS
+  }
+};
+
 //SET INITIAL INGREDIENTS
 
- const setIngredient = (ingName) => {
+export const setIngredient = (ingName) => {
   return {
     type: actionTypes.SET_INGREDIENTS,
     ingredientName: ingName,
   };
 };
 
-
-//ERROR
-const setError = () => {
-  return {
-    type: actionTypes.SET_ERROR_FAILED,
-  };
-};
-
-//ASYNC SET FUNCTION
-
-export const addInitialIngredients = () => {
-  return (dispatch) => {
-    instance.get("/ingrediens.json").then((res) => {
-      dispatch(setIngredient(res.data));
-    })
-    .catch( () =>  {
-     dispatch(setError());
-    });
-  };
-};
 
 //ADD INGREDIENTS
 
@@ -50,5 +38,12 @@ export const removeIngredients = (ingName) => {
   return {
     type: actionTypes.REMOVE_INGREDIENTS,
     ingredientName: ingName,
+  };
+};
+
+//ERROR
+export const setError = () => {
+  return {
+    type: actionTypes.SET_ERROR_FAILED,
   };
 };

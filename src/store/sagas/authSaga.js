@@ -10,7 +10,6 @@ export function* logOutSaga(action) {
     yield put(actions.logOutSucceed())
 }
 
-
 export function* checkAuthTimeOutSaga(action) {
     yield delay(action.expirationTime * 1000)
     yield put(actions.logOut())
@@ -38,42 +37,22 @@ export function* authUserSaga(action) {
     } catch (error) {
         yield put(actions.authFail(error.res.data.error))
     }
-    
+
 }
 
+export function* authCheckStateSaga(action) {
+    const token = yield localStorage.getItem('token')
+    if (!token) {
+        yield put(actions.logOut())
+    } else {
+        const expirationTime = yield new Date(localStorage.getItem('expirationData'))
+        if (expirationTime <= new Date()) {
+            yield put(actions.logOut())
+        } else {
+            const userId = yield localStorage.getItem('userId')
+            yield put(actions.authSuccess(token, userId))
+            yield put(actions.checkAuthTimeOut((expirationTime.getTime() - new Date().getTime()) / 1000))
+        }
+    }
+}
 
-
-
-
-
-
-
-
-
-
-// dispatch(authStart())
-// const authData = {
-//     email: email,
-//     password: password,
-//     returnSecureToken: true
-// }
-
-// let url = (authData) => signUp.post("", authData)
-// if (!isSignUp) {
-//     url = (authData) => signIn.post("", authData)
-// }
-
-// url(authData).then(response => {
-
-//     const expirationDate = new Date(new Date().getTime() + response.data.expiresIn * 1000)
-
-//     localStorage.setItem('token', response.data.idToken)
-//     localStorage.setItem('expirationData', expirationDate)
-//     localStorage.setItem('userId', response.data.localId)
-
-//     dispatch(authSuccess(response.data.idToken, response.data.localId))
-//     dispatch(checkAuthTimeOut(response.data.expiresIn))
-
-// }).catch(err => {
-//     dispatch(authFail(err.response.data.error))
-// })
