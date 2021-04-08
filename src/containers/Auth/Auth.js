@@ -42,14 +42,16 @@ const initFormState = {
 
 const Auth = props => {
 
+    const { onSetAuthRedirectPath, buildingBurger, authRedirectPath } = props
+
     const [orderForm, setOrderform] = useState(initFormState)
     const [isSignUp, setSignUp] = useState(true)
 
     useEffect(() => {
-        if (!props.buildingBurger && props.authRedirectPath !== '/') {
-            props.onSetAuthRedirectPath()
+        if (!buildingBurger && authRedirectPath !== '/') {
+            onSetAuthRedirectPath()
         }
-    }, [])
+    }, [onSetAuthRedirectPath, buildingBurger, authRedirectPath])
 
     const inputChangedHandler = (event, controlName) => {
 
