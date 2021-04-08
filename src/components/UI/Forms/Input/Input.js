@@ -45,6 +45,7 @@ const form = (props) => {
                     className={inputClasses.join(' ')}
                     value={props.value}
                     onChange={props.changed}>
+                        
                     {props.elementConfig.options.map(x => {
                         return (
                             <option

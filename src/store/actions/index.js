@@ -3,7 +3,8 @@ export {
     removeIngredients,
     addInitialIngredients, 
     setIngredient, 
-    setError
+    setError,
+
     } from './burgerBuilder'
 
 export {
@@ -16,8 +17,6 @@ export {
     onPurchaseStart, 
     fetchOrdersSuccess, 
     fetchOrdersStart
-   
-
 } from './order'
 
 export {
@@ -30,5 +29,4 @@ export {
     authSuccess,
     checkAuthTimeOut, 
     authFail
-
 } from './authActions'

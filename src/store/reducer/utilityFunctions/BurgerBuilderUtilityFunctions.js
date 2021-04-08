@@ -16,7 +16,7 @@ export const addIngredients = (state, action) => {
     const updatedIngs = updateObject(state.ingredients, updatedIng)
     const updatedStateRed = {
       ingredients: updatedIngs,
-      totalPrice: state.totalPrice + state.ingredient_prices[action.ingredientName],
+      totalPrice: state.totalPrice - state.ingredient_prices[action.ingredientName],
     }
     return updateObject(state, updatedStateRed);
   }

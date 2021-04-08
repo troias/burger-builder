@@ -1,4 +1,3 @@
-import * as actionTypes from '../../../store/actions/actionTypes'
 import * as actionCreators from '../../../store/actions/index'
 
 

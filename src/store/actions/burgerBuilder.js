@@ -1,7 +1,6 @@
 import * as actionTypes from "./actionTypes";
-import instance from "../../axios-orders";
 
-//ASYNC SET FUNCTION
+// INGREDIENTS FUNCTIONS
 
 export const addInitialIngredients = () => {
   return {
@@ -9,17 +8,12 @@ export const addInitialIngredients = () => {
   }
 };
 
-//SET INITIAL INGREDIENTS
-
 export const setIngredient = (ingName) => {
   return {
     type: actionTypes.SET_INGREDIENTS,
     ingredientName: ingName,
   };
 };
-
-
-//ADD INGREDIENTS
 
 const saveIngredient = (ingName) => {
      return {
@@ -42,6 +36,7 @@ export const removeIngredients = (ingName) => {
 };
 
 //ERROR
+
 export const setError = () => {
   return {
     type: actionTypes.SET_ERROR_FAILED,

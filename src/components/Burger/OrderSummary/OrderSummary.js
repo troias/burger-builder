@@ -1,42 +1,33 @@
-import React from 'react';
+
 import Aux from '../../../hoc/Auxillary/Auxillary';
 import classes from './OrderSummary.module.css';
 import Button from '../../UI/Button/Button';
 
 
-class OrderSummary extends React.Component {
+const OrderSummary = props =>  {
 
-    componentDidUpdate() {
-      
-    }
-
-    render() {
-        const ingredientSummary = Object.keys(this.props.ingredients).map((x, i) => {
-            return <li key={x + i}><span style={{ textTransform: 'capitalize' }}>{x}: {this.props.ingredients[x]} </span></li>
+        const ingredientSummary = Object.keys(props.ingredients).map((x, i) => {
+            return <li key={x + i}><span style={{ textTransform: 'capitalize' }}>{x}: {props.ingredients[x]} </span></li>
         })
         return (
-
             <Aux>
-                <button onClick={this.props.close}>Close</button>
+                <button onClick={props.close}>Close</button>
                 <h3> You Order </h3>
                 <p> burger with the following ingredients:</p>
                 <ul>
                     {ingredientSummary}
                 </ul>
-                <p><strong>Total Price: {this.props.price.toFixed(2)}</strong></p>
+                <p><strong>Total Price: {props.price.toFixed(2)}</strong></p>
                 <div className={classes.orderButton}>
                     <Button
-                        clicked={this.props.continue}
+                        clicked={props.continue}
                         btnType="Success">Check out</Button>
                     <Button
-                        clicked={this.props.close}
+                        clicked={props.close}
                         btnType="Danger">Cancel</Button>
                 </div>
-
             </Aux>
         )
-    }
-
 }
 
 

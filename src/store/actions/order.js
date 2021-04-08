@@ -1,8 +1,4 @@
 import * as actionTypes from './actionTypes'
-import instance from "../../axios-orders";
-
-
-
 
 //PURCHASE_RELATED_ACTIONS
 
@@ -18,7 +14,6 @@ export const onPurchaseStart = () => {
     };
 };
 
-
 export const purchaseBurgerSuccess = (orderData, token) => {
   return {
       type: actionTypes.PURCHASE_BURGER_SUCCESS_INIT,
@@ -26,6 +21,15 @@ export const purchaseBurgerSuccess = (orderData, token) => {
       orderData: orderData
   }
 };
+
+///PURCHASE_ERROR
+
+export const purchaseBurgerFail = (err) => {
+    return {
+        type: actionTypes.PURCHASE_BURGER_FAIL,
+    };
+};
+
 
 //Order_Related_ Actions
 
@@ -70,13 +74,6 @@ export const fetchOrdersFail = (error) => {
         error: error
     }
 }
-
-
-export const purchaseBurgerFail = (err) => {
-    return {
-        type: actionTypes.PURCHASE_BURGER_FAIL,
-    };
-};
 
 
 
