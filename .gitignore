@@ -26,5 +26,5 @@ yarn-error.log*
 
 #Axios
 
-/src/axios-auth.js
-/src/axios-orders.js
+# /src/axios-auth.js
+# /src/axios-orders.js
