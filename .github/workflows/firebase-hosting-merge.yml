@@ -18,3 +18,5 @@ jobs:
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_REACT_MY_BURGER_8F966 }}'
           channelId: live
           projectId: react-my-burger-8f966
+        env:
+          FIREBASE_CLI_PREVIEWS: hostingchannels
