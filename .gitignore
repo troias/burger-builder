@@ -26,5 +26,6 @@ yarn-error.log*
 
 #Axios
 
+.env
 # /src/axios-auth.js
 # /src/axios-orders.js

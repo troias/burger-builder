@@ -45,6 +45,7 @@
     ]
   },
   "devDependencies": {
-    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.0"
+    "@wojtekmaj/enzyme-adapter-react-17": "^0.6.0",
+    "dotenv": "^10.0.0"
   }
 }
