@@ -44,12 +44,15 @@ export function* authUserSaga(action) {
         yield localStorage.setItem('userId', resp.data.localId)
         yield put(actions.authSuccess(resp.data.idToken, resp.data.localId))
         yield put(actions.checkAuthTimeOut(resp.data.expiresIn))
-
+    
+      
     } catch (error) {
-
-        yield put(actions.authFail(error.res.data.error))
+     
+        yield put(actions.authFail(error.response.data.error.message))
+     
     }
-
+    
+    
 }
 
 export function* authCheckStateSaga(action) {

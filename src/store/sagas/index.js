@@ -31,7 +31,6 @@ export function* watchAuth() {
 
 }
 export function* watchBurgerBuilder() {
-
     yield takeEvery(actionTypes.INIT_INGREDIENTS, addInitialIngredientsSaga)
 }
 export function* watchOrders() {
